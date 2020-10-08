@@ -22,15 +22,8 @@ oy = 1.-y;
 h = X*theta;
 first = (1/m)*(my.*log(sigmoid(h)));
 sec = (1/m)*oy.*log(1-sigmoid(h));
-lterm = (lambda/(2*m)) * (theta.^2);
-t= first-sec;
-J1 = sum(t);
-J2 = sum(lterm)-lterm(1);
-J = J1+J2;
+J = sum(first-sec);
 grad = (1/m)*(X'*(sigmoid(h)-y));
-temp = grad(1);
-grad = (1/m)*(X'*(sigmoid(h)-y))+(lambda/m)*theta;
-grad(1) = temp;
 
 
 
