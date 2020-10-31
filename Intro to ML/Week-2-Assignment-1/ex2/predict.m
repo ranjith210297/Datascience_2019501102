@@ -17,14 +17,9 @@ p = zeros(m, 1);
 
 h = sigmoid(X*theta);
 
-for i=drange(1:m)
-  if h(i,1)>=0.5
-    p(i,1) = 1;
-  elseif h(i,1) < 0.5
-    p(i,1) = 0;
-  end
+p = h >= 0.5;
   
-end
+
 
 
 

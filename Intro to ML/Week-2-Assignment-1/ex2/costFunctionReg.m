@@ -4,26 +4,40 @@ function [J, grad] = costFunctionReg(theta, X, y, lambda)
 %   theta as the parameter for regularized logistic regression and the
 %   gradient of the cost w.r.t. to the parameters. 
 
-% Initialize some useful values
-m = length(y); % number of training examples
 
-% You need to return the following variables correctly 
-J = 0;
-grad = zeros(size(theta));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
+  function J = logisticRegressionRegularizedCost(theta, X, y)
+      estimatedResults = sigmoid(X * theta);
+      trainingExamples = length(y);
+    
+      J = (- 1 / trainingExamples) * (
+        y'  * log(estimatedResults) 
+        + (1 - y)' * log(1 - estimatedResults)
+      ) + (lambda / (2 * trainingExamples)) * (
+        sum(theta .^ 2) - theta(1) ^ 2
+      );
+  endfunction
+  
+  function gradient = gradientVector(theta, X, y)
+    trainingExamples = length(y);
+    gradient = (1 / trainingExamples) * (X' * (sigmoid(X * theta) - y));
+  endfunction
+  
+  function gradient = regularizedGradientVector(theta, X, y)
+    trainingExamples = length(y);
+    gradient = gradientVector(theta, X, y);
+    modifiedHypothesis = (lambda / trainingExamples) * theta;
+    modifiedHypothesis(1) = 0;
+    gradient += modifiedHypothesis;
+  endfunction
 
-my = y.*(-1);
-oy = 1.-y;
-h = X*theta;
-first = (1/m)*(my.*log(sigmoid(h)));
-sec = (1/m)*oy.*log(1-sigmoid(h));
-J = sum(first-sec);
-grad = (1/m)*(X'*(sigmoid(h)-y));
+  J = logisticRegressionRegularizedCost(theta, X, y);
+  grad = regularizedGradientVector(theta, X, y);
 
 
 
