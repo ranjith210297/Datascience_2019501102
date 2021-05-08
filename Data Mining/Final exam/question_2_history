@@ -1,0 +1,28 @@
+setwd("D:\MSIT\2-YEAR-GIT-REPOS\Datascience_2019501102\Data Mining\Final exam")
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+datat<-read.csv("lenses_data.csv",header=FALSE)
+str(data)
+data<-read.csv("lenses_data.csv",header=FALSE,col.names=c("ID","age","spectacle_prescription","astigmatic","tear_production_rate","type_of_lense"))
+str(data)
+library(rpart)
+y = as.factor(data[,5])
+x = data[,1:4]
+model<=rpart(y~.,x,control=rpart.control(minsplit=0,minbucket=0,cp=-1,maxcompete=0,maxsurrogate=0,usesurrogate=0,xval=0,maxdepth=5))
+model<-rpart(y~.,x,control=rpart.control(minsplit=0,minbucket=0,cp=-1,maxcompete=0,maxsurrogate=0,usesurrogate=0,xval=0,maxdepth=5))
+library(rpart.plot)
+install rpart
+install.packages("rpart")
+install.packages('rpart.plot')
+library(rpart.plot)
+rpart.plot(model)
+#information gain for training set
+if = sum(y==predict(fit,x,type="class"))/length(y)
+inf_gain = sum(y==predict(fit,x,type="class"))/length(y)
+inf_gain = sum(y==predict(model,x,type="class"))/length(y)
+str(inf_gain)
+#misclassification error rate for trainig set
+m_error = 1-sum(y===predict(model,x,type="class"))/length(y)
+m_error = 1-sum(y==predict(model,x,type="class"))/length(y)
+str(m_error)
+savehistory("question_2_history)
+savehistory("question_2_history")
