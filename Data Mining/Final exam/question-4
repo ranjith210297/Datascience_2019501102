@@ -1,0 +1,61 @@
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+liver_data <- read.csv("Liver_data.csv",header=FALSE, col.names = c("mvc","alkphos","sgpt","gammagt","drinks","selector"))
+liver_data <- read.csv("Liver_data.csv",header=FALSE, col.names = c("mvc","alkphos","sgpt","sgot","gammagt","drinks","selector"))
+str(data)
+str(liver_data)
+#labelling all the data into 4 classes.
+liver_data$selector <= as.factor(liver_data$selector)
+liver_data$selector <- as.factor(liver_data$selector)
+liver_data$drinks <- cut(liver_data$drinks, breaks = c(0,5,10,15,20), labels = c('C1','C2','C3','C4'), right = FALSE)
+liver_data <- na.omit(liver_data)
+#now selecting the training and testing values
+train = subset(liver_data, liver_data$selector == 1)
+str(train)
+test = subset(liver_data, liver_data$selector == 2)
+str(test)
+#now selecting train and test variables
+x_train <- subset(train, select = -c(selector, drinks))
+x_test <- subset(test,select = -c(selector, drinks))
+str(x_train)
+str(x_test)
+#importing library for knn
+library(knn)
+install.packages("knn")
+library(knn)
+install.packages("knn", dependencies = TRUE)
+install.packages("kknn")
+library(knn)
+library(kknn)
+library(class)
+#now training and testing target variables
+y_train = train[,6, drop = TRUE]
+y_test = test[,6,drop = TRUE]
+str(y_train)
+str(y_test)
+#misclassification error for training set when k=1
+fit1 = knn(x_train,x_train,y_train,k=1)
+mis_err1 = 1-sum(y_train==fit1)/length(y_train)
+str(mis_err1)
+#misclassification error for training set when k=2
+fit1 = knn(x_train,x_train,y_train,k=2)
+mis_err2 = 1-sum(y_train==fit1)/length(y_train)
+str(mis_err2)
+#misclassification error for training set when k=3
+fit1 = knn(x_train,x_train,y_train,k=3)
+mis_err3 = 1-sum(y_train==fit1)/length(y_train)
+str(mis_err3)
+#misclassification error for test set when k=1
+fit1 = knn(x_test,x_test,y_test,k=1)
+mis_errt1 = 1-sum(y_test==fit1)/length(y_est)
+mis_errt1 = 1-sum(y_test==fit1)/length(y_test)
+str(miss_errt1)
+str(mis_errt1)
+#misclassification error for test set when k=2
+fit1 = knn(x_test,x_test,y_test,k=2)
+mis_errt2 = 1-sum(y_test==fit1)/length(y_est)
+mis_errt2 = 1-sum(y_test==fit1)/length(y_test)
+str(mis_errt2)
+#misclassification error for test set when k=3
+fit1 = knn(x_test,x_test,y_test,k=3)
+mis_errt3 = 1-sum(y_test==fit1)/length(y_test)
+str(mis_errt3)
