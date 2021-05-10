@@ -1,0 +1,23 @@
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+liver_data<-read.csv("Liver_data.csv", header = FALSE, col.names = c("mcv", "alkphos", "sgpt", "sgot", "gammagt", "drinks","selector"))
+library(corrplot)
+install.packages("corrplot")
+library(corrplot)
+result = cor(plot)
+result = cor(liver_data)
+corrplot(result)
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+liver_data<-read.csv("Liver_data.csv", header = FALSE, col.names = c("mcv", "alkphos", "sgpt", "sgot", "gammagt", "drinks","selector"))
+str(liver_data)
+x_data = liver_data[,1:5]
+y_data = liver_data[,6]
+#now calculating misclassification error rate
+fit = kmeans(x,4)
+fit = kmeans(x_data,4)
+library(class)
+knnfit = knn(fit$centers,x,as.factor(c(1,2,3,4)))
+knnfit = knn(fit$centers,x_data,as.factor(c(1,2,3,4)))
+miss_err = 1-sum(knnfit == y)/length(y)
+miss_err = 1-sum(knnfit == y_data)/length(y_data)
+str(miss_err)
+savehistory("question7")
