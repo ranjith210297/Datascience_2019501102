@@ -1,0 +1,57 @@
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+liver_data<-read.csv("Liver_data.csv", header = FALSE, col.names = c("mcv", "alkphos", "sgpt", "sgot", "gammagt", "drinks","selector"))
+library(corrplot)
+install.packages("corrplot")
+library(corrplot)
+result = cor(plot)
+result = cor(liver_data)
+corrplot(result)
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+liver_data<-read.csv("Liver_data.csv", header = FALSE, col.names = c("mcv", "alkphos", "sgpt", "sgot", "gammagt", "drinks","selector"))
+str(liver_data)
+x_data = liver_data[,1:5]
+y_data = liver_data[,6]
+#now calculating misclassification error rate
+fit = kmeans(x,4)
+fit = kmeans(x_data,4)
+library(class)
+knnfit = knn(fit$centers,x,as.factor(c(1,2,3,4)))
+knnfit = knn(fit$centers,x_data,as.factor(c(1,2,3,4)))
+miss_err = 1-sum(knnfit == y)/length(y)
+miss_err = 1-sum(knnfit == y_data)/length(y_data)
+str(miss_err)
+savehistory("question7")
+setwd("D:\\MSIT\\2-YEAR-GIT-REPOS\\Datascience_2019501102\\Data Mining\\Final exam")
+data <- read.csv("BSE_Sensex_Index.csv", header = TRUE)
+#creating successive growth rate column
+library(dplyr)
+install.packages("dplyr")
+library(dplyr)
+#now creating a new successive growth rate column.
+new_col = mutate(data, succ_rate = lead((lag(Close) - Close) / Close))
+str(new_col)
+new_col = mutate(data, succ_rate = lead((Close - lag(Close)) / lag(Close))
+new_col = mutate(data, succ_rate = lead((Close - lag(Close)) / lag(Close)))
+str(new_gcol)
+str(new_col)
+#now replacing the last column of growth rate col+
+#with mean above all rows of column
+lastcol <- nrow(new_col)
+new_col$growth_rate[lastcol] <- mean(new_col$growth_rate[c((lastcol-3): (lastcol-1))])
+str(new_col$growth_rate)
+new_col$succ_rate[lastcol] <- mean(new_col$succ_rate[c((lastcol-3): (lastcol-1))])
+str(new_col$succ_rate)
+#calculating z-scores
+growth_rate_mean <- mean)new_col$succ_rate, na.rm=TRUE)
+growth_rate_mean <- mean(new_col$succ_rate, na.rm=TRUE)
+growth_rate_std <- sd(new_col$succ_rate,na.rm=TRUE)
+z<-(new_col[,8] - growth_rate_mean) / growth_rate_std
+sort(z)
+new_col$zscores <- z
+str(new_col$zscores)
+str(z)
+sort(z)
+#dates of the outliers
+dates <- subset(new_col[,1], new_col[,"zscores"] >= 3.0 | new_col[,"zscores"]<=-3.0)
+View(dates)
+savehistory("question8")
