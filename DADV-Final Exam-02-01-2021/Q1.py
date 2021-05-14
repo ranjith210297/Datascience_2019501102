@@ -1,3 +1,26 @@
+
+'''
+A typical link given below fetch the daily historical data for
+ the stock Apple Inc (AAPL is ticker symbol) from March,01,2018 
+ to December 13,2018.
+https://finance.yahoo.com/quote/AAPL/history?period1=1519842600&period2=1544639400&interval=1d&filter=history&frequency=1d
+By changing ticker symbols and start and end dates you get the 
+historical data for other stocks. You can also change frequency
+ to weekly monthly by wk and mo.
+The following links give all S&P 100 and S&P 500 companies 
+list.
+https://en.wikipedia.org/wiki/S%26P_100       
+https://en.wikipedia.org/wiki/List_of_S%26P_500_companies
+####################
+1.	By using scraping tools download the last 1000 trading days 
+historical data (daily, weekly and monthly) for all S&P500
+ companies in to your system. Use parallelization to make download
+ faster. (Note: Saturdays and Sundays and some festival days etc.
+  are not trading days. The NYSE and NASDAQ average about 253 
+  trading days a year)
+'''
+
+
 import bs4 as bs
 import datetime as dt
 import os
